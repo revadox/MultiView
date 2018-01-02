@@ -10,9 +10,32 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var textField: UITextField!
+    @IBAction func sendButton(_ sender: UIButton) {
+        
+        if textField.text != ""
+        {
+            performSegue(withIdentifier: "segue" , sender: self)
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let secondController = segue.destination as! SecondViewController
+        secondController.myString = textField.text!
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        //textField code
+      
+        textField.resignFirstResponder()  //if desired
+        
+        return true
     }
 
     override func didReceiveMemoryWarning() {
